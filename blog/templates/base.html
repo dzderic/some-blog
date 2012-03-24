@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>{% block title %}{% endblock %} | Some blog</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body>
+    <div class="container">
+      {% if request.user.is_authenticated %}
+        <div class="pull-right">
+          Logged in as {{ request.user.username }}
+        </div>
+      {% endif %}
+      {% block content %}{% endblock %}
+
+      <footer>
+        <p>&copy; David Zderic 2012</p>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+  </body>
+
+</html>

@@ -23,6 +23,9 @@ INSTALLED_APPS = (
 
     # djangoappengine should come last, so it can override a few manage.py commands
     'djangoappengine',
+    'bootstrap',
+
+    'blog',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -48,3 +51,7 @@ ADMIN_MEDIA_PREFIX = '/media/admin/'
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), 'templates'),)
 
 ROOT_URLCONF = 'urls'
+
+LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "/login/"
+LOGOUT_URL = "/logout/"

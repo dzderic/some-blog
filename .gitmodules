@@ -13,3 +13,6 @@
 [submodule "lib/django-nonrel"]
 	path = lib/django-nonrel
 	url = https://github.com/django-nonrel/django-nonrel.git
+[submodule "lib/bootstrap"]
+	path = lib/bootstrap
+	url = https://github.com/earle/django-bootstrap.git
