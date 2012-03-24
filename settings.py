@@ -53,5 +53,5 @@ TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), 'templates'),)
 ROOT_URLCONF = 'urls'
 
 LOGIN_REDIRECT_URL = "/"
-LOGIN_URL = "/login/"
-LOGOUT_URL = "/logout/"
+LOGIN_URL = "/login"
+LOGOUT_URL = "/logout"
