@@ -11,14 +11,16 @@
 <h1>New post</h1>
 
 <form action="" method="POST">
+  {{ form.non_field_errors }}
   <div class="tabbable md-editor-tabs">
-  <ul class="nav nav-tabs">
-      <li class="active"><a href="#tab-edit" data-toggle="tab">Edit</a></li>
-      <li><a href="#tab-preview" data-toggle="tab">Preview</a></li>
-  </ul>
-  <div class="tab-content">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab-edit" data-toggle="tab">Edit</a></li>
+        <li><a href="#tab-preview" data-toggle="tab">Preview</a></li>
+    </ul>
+    <div class="tab-content">
       <div class="tab-pane active" id="tab-edit">
-        <textarea name="content" id="content" class="md-editor"></textarea>
+        {{ form.content.errors }}
+        <textarea name="content" id="content" class="md-editor">{{ form.content.value }}</textarea>
         <div class="pull-right">
           <i class="icon-arrow-up"></i>
           <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> goes here
@@ -32,13 +34,14 @@
   </div>
 
   <div class="form-actions">
+    {{ form.title.errors }}
     <div class="control-group">
       <label class="control-label" for="title">Title</label>
       <div class="controls">
-        <input type="text" class="input-xlarge" id="title" name="title" />
+        <input type="text" class="input-xlarge" id="title" name="title" value="{{ form.title.value }}" />
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Create post <i class="icon-ok icon-white"></i></button>
+    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Create post</button>
   </div>
 </form>
 
