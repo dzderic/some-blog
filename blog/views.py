@@ -19,11 +19,11 @@ def new_post(request):
         form = PostForm(request.POST)
         if form.is_valid():
             new_post = form.save()
-            return HttpResponseRedirect(new_post.get_absolute_url())
+            return HttpResponseRedirect(new_post.get_edit_url())
     else:
         form = PostForm()
 
-    return render(request, "blog/new.html", {"form": form})
+    return render(request, "blog/edit.html", {"form": form})
 
 @login_required
 def render_markdown(request):
@@ -40,8 +40,25 @@ def view_post(request, slug):
 
 @login_required
 def edit_post(request, slug):
-    return HttpResponse("")
+    post = get_object_or_404(Post, slug=slug)
+
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            new_post = form.save()
+            return HttpResponseRedirect(new_post.get_edit_url())
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, "blog/edit.html", {"form": form})
 
 @login_required
 def delete_post(request, slug):
-    return HttpResponse("")
+    post = get_object_or_404(Post, slug=slug)
+
+    if request.method == "POST":
+        if request.POST["amisure"] == "youbetiam":
+            post.delete()
+            return HttpResponseRedirect("/")
+
+    return render(request, "blog/delete.html", {"post": post})

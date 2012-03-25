@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete post{% endblock %}
+
+{% block content %}
+<p>Are you sure you want to irrevocably delete '{{ post.title}}'?</p>
+
+<form action="" method="POST">
+  <input type="hidden" name="amisure" value="youbetiam" />
+
+  <button type="submit" class="btn btn-danger">Yes I'm sure</button>
+  <a href="/" class="btn">No, take me home please</a>
+
+</form>
+
+{% endblock %}
