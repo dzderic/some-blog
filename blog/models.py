@@ -10,9 +10,9 @@ class PostManager(models.Manager):
         return self.order_by('-date_posted')[:settings.POSTS_PER_PAGE]
 
 class Post(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, default="")
     slug = models.SlugField()
-    content = models.TextField()
+    content = models.TextField(default="")
     date_posted = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 

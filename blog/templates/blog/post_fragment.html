@@ -6,12 +6,16 @@
     <i class="icon-edit icon-white"></i> Edit
   </a>
 {% endif %}
-<a href="{{ post.get_absolute_url }}">
+{% if not no_link %}
+  <a href="{{ post.get_absolute_url }}">
+    <h2 class="title">{{ post.title }}</h2>
+  </a>
+{% else %}
   <h2 class="title">{{ post.title }}</h2>
-</a>
+{% endif %}
 <div class="content">
   {{ post.html_content|safe }}
 </div>
-<div class="posted">
+<div class="date-posted">
   Date posted: {{ post.date_posted }}
 </div>

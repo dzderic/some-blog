@@ -1,6 +1,6 @@
 import json
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
@@ -9,8 +9,8 @@ from .forms import PostForm
 from .models import Post
 
 def home(request):
-    return render(request, 'home.html', {
-        'posts': Post.objects.recent_posts(),
+    return render(request, "home.html", {
+        "posts": Post.objects.recent_posts(),
     })
 
 @login_required
@@ -23,7 +23,7 @@ def new_post(request):
     else:
         form = PostForm()
 
-    return render(request, 'blog/new.html', {'form': form})
+    return render(request, "blog/new.html", {"form": form})
 
 @login_required
 def render_markdown(request):
@@ -31,16 +31,17 @@ def render_markdown(request):
         return HttpResponseBadRequest()
 
     return HttpResponse(json.dumps({
-        'result': utils.render_markdown(request.read()),
+        "result": utils.render_markdown(request.read()),
     }), mimetype="application/json")
 
 def view_post(request, slug):
-    return HttpResponse('')
+    post = get_object_or_404(Post, slug=slug)
+    return render(request, "blog/view.html", {"post": post})
 
 @login_required
 def edit_post(request, slug):
-    return HttpResponse('')
+    return HttpResponse("")
 
 @login_required
 def delete_post(request, slug):
-    return HttpResponse('')
+    return HttpResponse("")
