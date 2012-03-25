@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse
+from django.core.cache import cache
 
 from . import utils
 
@@ -13,7 +14,17 @@ class Post(models.Model):
 
     @property
     def html_content(self):
-        return utils.render_markdown(self.content)
+        cached = cache.get(self.html_cache_key)
+        if cached:
+            return cached
+        else:
+            html = utils.render_markdown(self.content)
+            cache.set(self.html_cache_key, html, 3600)
+            return html
+
+    @property
+    def html_cache_key(self):
+        return 'blog:md-cache:%s' % self.slug
 
     def get_edit_url(self):
         return reverse('edit_post', kwargs={'slug': self.slug})
@@ -27,4 +38,6 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        else: # blow the cache
+            cache.delete(self.html_cache_key)
         super(Post, self).save(*args, **kwargs)
