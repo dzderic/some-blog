@@ -6,6 +6,7 @@ handler500 = 'djangotoolbox.errorviews.server_error'
 
 urlpatterns = patterns('',
     url('^$', views.home, name='home'),
+    url('^(?P<page>\d+)/$', views.home, name='post_archive'),
     url('^p/new/$', views.new_post, name='new_post'),
     url('^p/md/$', views.render_markdown, name='render_markdown'),
     url('^p/(?P<slug>[^/]+)/$', views.view_post, name='view_post'),

@@ -1,16 +1,26 @@
 import json
 
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseRedirect, \
+                        Http404
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage
+from django.conf import settings
 
 from . import utils
 from .forms import PostForm
 from .models import Post
 
-def home(request):
+def home(request, page=1):
+    paginator = Paginator(Post.objects.order_by('-date_posted'),
+                          settings.POSTS_PER_PAGE)
+    try:
+        posts = paginator.page(page)
+    except EmptyPage:
+        raise Http404
+
     return render(request, "home.html", {
-        "posts": Post.objects.recent_posts(),
+        "posts": posts,
     })
 
 @login_required

@@ -43,3 +43,11 @@ footer {
 .date-posted {
   padding-top: 15px;
 }
+
+.new-button-wrapper {
+  height: 24px;
+}
+
+.pager {
+  margin-top: 24px;
+}

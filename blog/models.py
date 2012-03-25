@@ -1,13 +1,8 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse
-from django.conf import settings
 
 from . import utils
-
-class PostManager(models.Manager):
-    def recent_posts(self):
-        return self.order_by('-date_posted')[:settings.POSTS_PER_PAGE]
 
 class Post(models.Model):
     title = models.CharField(max_length=255, default="")
@@ -15,8 +10,6 @@ class Post(models.Model):
     content = models.TextField(default="")
     date_posted = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-
-    objects = PostManager()
 
     @property
     def html_content(self):
