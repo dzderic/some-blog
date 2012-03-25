@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     url('^p/new/$', views.new_post, name='new_post'),
     url('^p/md/$', views.render_markdown, name='render_markdown'),
     url('^p/(?P<slug>[^/]+)/$', views.view_post, name='view_post'),
+    url('^p/(?P<slug>[^/]+)/edit/$', views.edit_post, name='edit_post'),
+    url('^p/(?P<slug>[^/]+)/delete/$', views.delete_post, name='delete_post'),
 
     url('^login$', 'django.contrib.auth.views.login', {'template_name': 'login.html',
      'authentication_form': forms.BootstrapAuthenticationForm}, name="login"),

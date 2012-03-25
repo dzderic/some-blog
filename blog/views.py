@@ -6,9 +6,12 @@ from django.contrib.auth.decorators import login_required
 
 from . import utils
 from .forms import PostForm
+from .models import Post
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home.html', {
+        'posts': Post.objects.recent_posts(),
+    })
 
 @login_required
 def new_post(request):
@@ -32,4 +35,12 @@ def render_markdown(request):
     }), mimetype="application/json")
 
 def view_post(request, slug):
+    return HttpResponse('')
+
+@login_required
+def edit_post(request, slug):
+    return HttpResponse('')
+
+@login_required
+def delete_post(request, slug):
     return HttpResponse('')

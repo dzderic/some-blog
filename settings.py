@@ -55,3 +55,6 @@ ROOT_URLCONF = 'urls'
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/login"
 LOGOUT_URL = "/logout"
+
+# Number of posts to display per page
+POSTS_PER_PAGE = 10

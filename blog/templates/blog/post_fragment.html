@@ -1,0 +1,17 @@
+{% if request.user.is_authenticated %}
+  <a href="{{ post.get_delete_url }}" class="btn btn-danger pull-right delete-button">
+    <i class="icon-remove icon-white"></i> Delete
+  </a>
+  <a href="{{ post.get_edit_url }}" class="btn btn-primary pull-right edit-button">
+    <i class="icon-edit icon-white"></i> Edit
+  </a>
+{% endif %}
+<a href="{{ post.get_absolute_url }}">
+  <h2 class="title">{{ post.title }}</h2>
+</a>
+<div class="content">
+  {{ post.html_content|safe }}
+</div>
+<div class="posted">
+  Date posted: {{ post.date_posted }}
+</div>
